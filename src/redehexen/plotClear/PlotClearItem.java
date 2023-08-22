@@ -16,8 +16,18 @@ public class PlotClearItem {
 		}
 	}
 	
-	public static ItemStack getItem() {
+	private static ItemStack getItem() {
 		// TODO cria item
+	}
+	
+	public static boolean isSameItem(ItemStack item2) {
+		ItemStack item1 = getItem();
+		
+		String item1Name = item1.getItemMeta().getDisplayName();
+		String item2Name = item2.getItemMeta().getDisplayName();
+		
+		return item1.getType() == item2.getType() && item1Name != null && item2Name != null &&
+				item1Name.equals(item2Name);				
 	}
 
 }
