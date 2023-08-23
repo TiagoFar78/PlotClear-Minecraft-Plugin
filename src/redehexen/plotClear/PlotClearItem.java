@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,13 +60,18 @@ public class PlotClearItem implements Listener {
 	public void playerClick(PlayerInteractEvent e) {	
 		ConfigManager configManager = ConfigManager.getInstance();
 		
+		Block block = e.getClickedBlock();
+		if (block == null) {
+			return;
+		}
+		
 		ItemStack item = e.getPlayer().getItemInHand();
 		if (!isSameItem(item)) {
 			return;
 		}
 		
 		Player player = e.getPlayer();
-		if (player.hasPermission(PlotClear.USE_PERMISSION)) {
+		if (!player.hasPermission(PlotClear.USE_PERMISSION)) {
 			player.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}

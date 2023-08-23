@@ -20,7 +20,7 @@ public class GiveItemSubcommand implements PlotClearSubcommand {
 		}
 		
 		if (args.length != 1) {
-			configManager.getGiveItemUsageMessage();
+			sender.sendMessage(configManager.getGiveItemUsageMessage());
 			return;
 		}
 		
@@ -28,12 +28,12 @@ public class GiveItemSubcommand implements PlotClearSubcommand {
 		Player player = Bukkit.getPlayer(playerName);
 		
 		if (!player.isOnline()) {
-			player.sendMessage(configManager.getPlayerOfflineMessage());
+			sender.sendMessage(configManager.getPlayerOfflineMessage());
 			return;
 		}
 		
 		PlotClearItem.giveToPlayer(player);
-		player.sendMessage(configManager.getItemGivenMessage());
+		sender.sendMessage(configManager.getItemGivenMessage());
 	}
 
 }

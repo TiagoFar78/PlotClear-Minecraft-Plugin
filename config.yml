@@ -1,7 +1,7 @@
 LowerY: 32
 HigherY: 256
 Itens:
-  ClearPlotItem:
+  ClearPlot:
     Name: "&6Clear plot"
 Messages:
   Warnings:
