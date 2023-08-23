@@ -7,9 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import redehexen.plotClear.commands.PlotClearCommand;
+
 public class PlotClear extends JavaPlugin {
 	
-	public static final String SET_REGION_PERMISSION = "TF_PlotClear.SetRegion";
+	public static final String USE_PERMISSION = "TF_PlotClear.Use";
+	public static final String GIVE_PERMISSION = "TF_PlotClear.GiveItem";
 	public static final String RELOAD_PERMISSION = "TF_PlotClear.Reload";
 	
 	@Override
@@ -18,9 +21,9 @@ public class PlotClear extends JavaPlugin {
 			saveDefaultConfig();
 		}
 		
-		getServer().getPluginManager().registerEvents(new Events(), this);
+		getServer().getPluginManager().registerEvents(new PlotClearItem(), this);
 		
-		getCommand("PlotClear").setExecutor(new KillOnDisconnectCommand());
+		getCommand("PlotClear").setExecutor(new PlotClearCommand());
 	}
 	
 	public static YamlConfiguration getYamlConfiguration() {

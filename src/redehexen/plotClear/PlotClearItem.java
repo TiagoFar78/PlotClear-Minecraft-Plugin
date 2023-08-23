@@ -52,9 +52,15 @@ public class PlotClearItem implements Listener {
 	}
 	
 	@EventHandler
-	public void playerClick(PlayerInteractEvent e) {
+	public void playerClick(PlayerInteractEvent e) {		
 		ItemStack item = e.getPlayer().getItemInHand();
 		if (!isSameItem(item)) {
+			return;
+		}
+		
+		Player player = e.getPlayer();
+		if (player.hasPermission(PlotClear.USE_PERMISSION)) {
+			// TODO send message
 			return;
 		}
 		
@@ -63,7 +69,7 @@ public class PlotClearItem implements Listener {
 		PlotAPI plotAPI = PlotsManager.getInstance().getPlotsAPI();
 		Plot plot = plotAPI.getPlot(loc);
 		
-		if (plot == null || !plot.isOwner(e.getPlayer().getUniqueId())) {
+		if (plot == null || !plot.isOwner(player.getUniqueId())) {
 			// TODO send message
 			return;
 		}
