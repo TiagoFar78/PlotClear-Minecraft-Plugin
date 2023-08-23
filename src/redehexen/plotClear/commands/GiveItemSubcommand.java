@@ -6,18 +6,21 @@ import org.bukkit.entity.Player;
 
 import redehexen.plotClear.PlotClear;
 import redehexen.plotClear.PlotClearItem;
+import redehexen.plotClear.managers.ConfigManager;
 
 public class GiveItemSubcommand implements PlotClearSubcommand {
 
 	@Override
 	public void execute(CommandSender sender, String cmdlabel, String[] args) {
+		ConfigManager configManager = ConfigManager.getInstance();
+		
 		if (!sender.hasPermission(PlotClear.GIVE_PERMISSION)) {
-			// TODO send message
+			sender.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}
 		
 		if (args.length != 1) {
-			// TODO send message
+			configManager.getGiveItemUsageMessage();
 			return;
 		}
 		
@@ -25,12 +28,12 @@ public class GiveItemSubcommand implements PlotClearSubcommand {
 		Player player = Bukkit.getPlayer(playerName);
 		
 		if (!player.isOnline()) {
-			// TODO send message
+			player.sendMessage(configManager.getPlayerOfflineMessage());
 			return;
 		}
 		
 		PlotClearItem.giveToPlayer(player);
-		// TODO send message
+		player.sendMessage(configManager.getItemGivenMessage());
 	}
 
 }

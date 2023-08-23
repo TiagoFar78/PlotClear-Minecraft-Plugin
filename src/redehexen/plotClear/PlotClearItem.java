@@ -16,22 +16,26 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.intellectualcrafters.plot.api.PlotAPI;
 import com.intellectualcrafters.plot.object.Plot;
 
+import redehexen.plotClear.managers.ConfigManager;
 import redehexen.plotClear.managers.PlotsManager;
 
 public class PlotClearItem implements Listener {
 	
 	public static void giveToPlayer(Player player) {
+		ConfigManager configManager = ConfigManager.getInstance();
+		
 		HashMap<Integer, ItemStack> unplacedItens = player.getInventory().addItem(create());
 		
 		boolean wasPlaced = unplacedItens.size() == 0;
 		if (!wasPlaced) {
-			// TODO send message
+			player.sendMessage(configManager.getFullInventoryMessage());
 			return;
 		}
 	}
 	
 	private static ItemStack create() {
-		String itemName = ;
+		ConfigManager configManager = ConfigManager.getInstance();
+		String itemName = configManager.getItemName();
 		
 		ItemStack item = new ItemStack(Material.GOLD_SPADE);
 		ItemMeta itemMeta = item.getItemMeta();
@@ -52,7 +56,9 @@ public class PlotClearItem implements Listener {
 	}
 	
 	@EventHandler
-	public void playerClick(PlayerInteractEvent e) {		
+	public void playerClick(PlayerInteractEvent e) {	
+		ConfigManager configManager = ConfigManager.getInstance();
+		
 		ItemStack item = e.getPlayer().getItemInHand();
 		if (!isSameItem(item)) {
 			return;
@@ -60,7 +66,7 @@ public class PlotClearItem implements Listener {
 		
 		Player player = e.getPlayer();
 		if (player.hasPermission(PlotClear.USE_PERMISSION)) {
-			// TODO send message
+			player.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}
 		
@@ -70,7 +76,7 @@ public class PlotClearItem implements Listener {
 		Plot plot = plotAPI.getPlot(loc);
 		
 		if (plot == null || !plot.isOwner(player.getUniqueId())) {
-			// TODO send message
+			player.sendMessage(configManager.getWrongPlotMessage());
 			return;
 		}
 		
@@ -79,8 +85,9 @@ public class PlotClearItem implements Listener {
 	
 	@SuppressWarnings("deprecation")
 	private void clearPlot(Plot plot) {
-		int lowerY;
-		int higherY;
+		ConfigManager configManager = ConfigManager.getInstance();		
+		int lowerY = configManager.getLowerY();
+		int higherY = configManager.getHigherY();
 
 		World world = Bukkit.getWorld(plot.getBottom().getWorld());
 		

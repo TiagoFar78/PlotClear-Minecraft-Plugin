@@ -4,6 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import redehexen.plotClear.managers.ConfigManager;
+
 public class PlotClearCommand implements CommandExecutor {
 	
 	private static final String GIVE_COMMAND = "give";
@@ -39,7 +41,7 @@ public class PlotClearCommand implements CommandExecutor {
 	private void sendGeneralUsageMessage(CommandSender sender) {
 		ConfigManager configManager = ConfigManager.getInstance();
 		
-		sender.sendMessage(configManager.getSetPositionUsageMessage());
+		sender.sendMessage(configManager.getGiveItemUsageMessage());
 		sender.sendMessage(configManager.getReloadUsageMessage());
 	}
 

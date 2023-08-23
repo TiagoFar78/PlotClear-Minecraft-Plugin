@@ -1,0 +1,17 @@
+LowerY: 32
+HigherY: 256
+Itens:
+  ClearPlotItem:
+    Name: "&6Clear plot"
+Messages:
+  Warnings:
+    ItemGiven: "&aItem given"
+    Reloaded: "&aReloaded"    
+  Errors:
+    FullInventory: "&cYou couldnt receive the plot clear item! Free some space"
+    NotAllowed: "&cNot allowed"
+    WrongPlot: "&cYou can only clear your plots"
+    PlayerOffline: "&cPlayer offline"   
+  Usages:
+    GiveItem: "&e/PlotClear give <player>"
+    Reload: "&e/PlotClear reload"
