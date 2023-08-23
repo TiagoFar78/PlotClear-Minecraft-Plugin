@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -87,6 +88,7 @@ public class PlotClearItem implements Listener {
 		}
 		
 		clearPlot(plot);
+		removeItem(player);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -104,6 +106,16 @@ public class PlotClearItem implements Listener {
                 }
             }
         }
+	}
+	
+	private void removeItem(Player player) {
+		Inventory inv = player.getInventory();
+		
+		for (ItemStack item : inv.getContents()) {
+			if (isSameItem(item)) {
+				inv.remove(item);
+			}
+		}
 	}
 
 }
