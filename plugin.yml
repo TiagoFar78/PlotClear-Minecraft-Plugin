@@ -1,0 +1,9 @@
+name: TF_PlotClear
+version: 1.0
+author: TiagoFar78
+main: redehexen.plotClear.PlotClear
+commands:
+  PlotClear:
+depend:
+- PlotSquared
+  
