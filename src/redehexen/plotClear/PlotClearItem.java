@@ -48,6 +48,10 @@ public class PlotClearItem implements Listener {
 	}
 	
 	private boolean isSameItem(ItemStack item2) {
+		if (item2 == null) {
+			return false;
+		}
+		
 		ItemStack item1 = create();
 		
 		String item1Name = item1.getItemMeta().getDisplayName();
