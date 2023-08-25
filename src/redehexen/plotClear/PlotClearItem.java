@@ -54,8 +54,14 @@ public class PlotClearItem implements Listener {
 		
 		ItemStack item1 = create();
 		
-		String item1Name = item1.getItemMeta().getDisplayName();
-		String item2Name = item2.getItemMeta().getDisplayName();
+		ItemMeta item1Meta = item1.getItemMeta();
+		ItemMeta item2Meta = item2.getItemMeta();
+		if (item1Meta == null || item2Meta == null) {
+			return false;
+		}
+		
+		String item1Name = item1Meta.getDisplayName();
+		String item2Name = item2Meta.getDisplayName();
 		
 		return item1.getType() == item2.getType() && item1Name != null && item2Name != null &&
 				item1Name.equals(item2Name);
